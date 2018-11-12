@@ -47,6 +47,9 @@ def usersearch():
             user_name = request.form['system_user']
             return User_repo.search_user(user_name)
       return render_template('usersearch.html')
+
+<link href= "C:\Users\Mike\newdirectory\shu-interns\shuinterns\reset.html" rel = "sty">
+
    
    
    
