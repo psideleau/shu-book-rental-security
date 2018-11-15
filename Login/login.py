@@ -5,9 +5,10 @@ import json
 app = Flask(__name__)
 User_repo = UserRepository()
 user_list = []
-user_list.append(User("jbucherati","Password1","jab140@snet.net"))
-user_list.append(User("mike", "password2", "mike@shu.edu"))
-user_list.append(User("abdullah", "password3", "abdullah@shu.edu"))
+user_list.append(User("jbucherati","Password1","jab140@snet.net",'123',True))
+user_list.append(User("mike", "password2", "mike@shu.edu",'456',True))
+user_list.append(User("abdullah", "password3", "abdullah@shu.edu",'789',True))
+
 #user1 = User("jbucherati","password1","jab140@snet.net")
 #user2 = User("Mike","password2","mike@shu.edu")
 
@@ -31,13 +32,13 @@ def showdata():
      else:
         return jsonify({'Logged in User': user_login_name, 'Password': user_login_password})
 
-@app.route('/reset',methods = ['POST','GET'])
-def reset():
-    return render_template('reset.html')
+@app.route('/accountstatus')
+def accountstatus():
+    return User_repo.showuserstatus()
 
 @app.route('/showusers', methods = ['POST', 'GET'])
 def showusers():
-     # User_repo = UserRepository()
+     
       return User_repo.listusers()
     
 @app.route('/usersearch', methods =['POST', 'GET'])
@@ -49,8 +50,19 @@ def usersearch():
       return render_template('usersearch.html')
    
    
-   
-   
+@app.route('/showid', methods = ['POST', 'GET'])
+def showid():
+      if request.method =="POST":
+            student_id = request.form['student_id']
+            return User_repo.showstudentid(student_id)
+      return render_template('showid.html')
+            
+@app.route('/acctmgmt', methods = ['POST', 'GET']) 
+def acctmgmt():
+      if request.method =="POST":
+            system_user = request.form['system_user'] 
+            return User_repo.disable_user(system_user)
+      return render_template('acctmgmt.html') 
    
    
     #jsonify({'Username':user_list[0].username, 'Password':user_list[0].password, 'email':user_list[0].email_address })
