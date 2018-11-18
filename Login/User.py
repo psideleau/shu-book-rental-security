@@ -48,6 +48,16 @@ class UserRepository():
     
        return user_search + "  User Not Found"
     
+     def email_search(self,email_search):
+
+       self.user_search= user_search = email_search
+       if email_search == self.emails[0].useremail:
+           return "Useremail " + user_search + " Found"
+       elif user_search != self.users[1].useremail:
+           return "Useremail" + user_search + " Not Found"
+       elif email_search != self.users[2].username:
+           return "Useremail" + email_search + " Found"
+    
     def showstudentid(self,student_ID_number):
         self.student_ID_number = student_ID_number
                
