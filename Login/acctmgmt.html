@@ -1,0 +1,22 @@
+<!Doctype HTML>
+<html>
+<body>
+<h1>Enter a user account to disable.</h1>
+{{ csrf_token() }}
+
+<form action = "http://localhost:5000/acctmgmt" method="POST">
+    
+    
+<p> Username:</p>
+<p><input type = "text" name="system_user"  > </p>
+
+<p><input type = "submit" value = "disable"> </p>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+
+
+    
+
+
+</body>
+</html>

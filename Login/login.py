@@ -2,7 +2,17 @@ from flask import Flask, render_template, request,redirect,url_for,jsonify
 from User import User
 from User import UserRepository
 import json
+from flask_wtf.csrf import CSRFProtect
+
+
+
 app = Flask(__name__)
+CSRFProtect(app)
+csrf = CSRFProtect(app)
+csrf.init_app(app)
+app.config['SECRET_KEY'] = 'This_is_a_secret.'
+app.config['WTF_CSRF_SECRET_KEY'] = "This_is_another_secret."
+
 User_repo = UserRepository()
 user_list = []
 user_list.append(User("jbucherati","Password1","jab140@snet.net",'123',True))
@@ -49,7 +59,7 @@ def usersearch():
             return User_repo.search_user(user_name)
       return render_template('usersearch.html')
 
-<link href= "C:\Users\Mike\newdirectory\shu-interns\shuinterns\reset.html" rel = "sty">
+#<link href= "C:\Users\Mike\newdirectory\shu-interns\shuinterns\reset.html" rel = "sty">
 
    
    
@@ -64,7 +74,8 @@ def showid():
 def acctmgmt():
       if request.method =="POST":
             system_user = request.form['system_user'] 
-            return User_repo.disable_user(system_user)
+            token = request.form['csrf_token']
+            return token +  User_repo.disable_user(system_user) 
       return render_template('acctmgmt.html') 
    
    
