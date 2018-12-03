@@ -1,0 +1,22 @@
+
+    def disable_user(self, username):
+        self.username = username
+        if username == self.users[0].username and self.users[0].is_active == True:
+            # if attempt left is zero
+            if self.attempt_left ==0:
+                User.disable(self.users[0])
+             # self.users[0].is_active = False
+             return "User " + self.users[0].username + " account has been disabled."
+        elif username == self.users[1].username and self.users[1].is_active == True:
+            # if attempt left is zero
+            if self.attempt_left ==0:
+                User.disable(self.users[1])
+                print(self.users[1].is_active)
+                print(User.showuser(self.users[1]))
+                return "User " + self.users[1].username + " account has been disabled."
+        elif username == self.users[2].username and self.users[2].is_active == True:
+            # if attempt left is zero
+            if self.attempt_left ==0 and self.session_minutes < 30:
+                self.users[2].is_active = False
+                return "User " + self.users[2].username + " account has been disabled."
+        return "User Not Found or User is already disabled."
